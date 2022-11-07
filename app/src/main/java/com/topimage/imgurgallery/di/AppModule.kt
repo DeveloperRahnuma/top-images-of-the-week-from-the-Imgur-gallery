@@ -37,7 +37,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApi(): MyApi {
-        return Retrofit.Builder().baseUrl("https://api.imgur.com/")
+        return Retrofit.Builder().baseUrl("https://api.imgur.com/3/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }).build())
             .build().create()
