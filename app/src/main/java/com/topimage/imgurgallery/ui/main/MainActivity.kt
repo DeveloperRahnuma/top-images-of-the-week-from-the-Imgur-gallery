@@ -1,14 +1,17 @@
 package com.topimage.imgurgallery.ui.main
 
-import android.R
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.topimage.imgurgallery.data.network.responses.ImageResponce
+import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.databinding.ActivityMainBinding
+import com.topimage.imgurgallery.utill.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -29,13 +32,36 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        getImage()
+
     }
 
+    private fun getImage(){
+        GlobalScope.launch(Dispatchers.IO) {
+            viewModel?.getWeekTopImage()?.collect{
+                when(it){
+                    is Resource.Success -> {
+                        it.Data?.let { it1 -> setUpRecycleView(it1.data) }
+                    }
+                    is Resource.Loading -> {
+                        Log.i(TAG, "Loading State")
+                    }
+                    else -> {
+                        Log.i(TAG, "Loading Errror state")
+                    }
+                }
+            }
+        }
+    }
+
+
     // set up the RecyclerView
-    fun setUpRecycleView(){
-        binding.recycleView.layoutManager = LinearLayoutManager(this)
-        val adapter = MainRecycleAdapter(ArrayList())
-        binding.recycleView.adapter = adapter
+    private fun setUpRecycleView(imageInfoList: List<AlbumResponce>){
+        runOnUiThread(){
+            binding.recycleView.layoutManager = LinearLayoutManager(this)
+            val adapter = MainRecycleAdapter(this@MainActivity,imageInfoList)
+            binding.recycleView.adapter = adapter
+        }
     }
 
 }
