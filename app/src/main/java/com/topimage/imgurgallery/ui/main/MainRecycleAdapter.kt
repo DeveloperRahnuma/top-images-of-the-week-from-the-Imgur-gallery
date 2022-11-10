@@ -15,10 +15,18 @@ class MainRecycleAdapter(val context: Context,private val image: List<AlbumRespo
 
     // holder class to hold reference
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        //get view reference
+        //get view reference of item design which is in list_item
+
+        // here we will display the description of image
         val imageTitleText: TextView = view.findViewById(R.id.titleText)
+
+        // we will use this view to display number of image total have for that image group
         val imageNumber: TextView = view.findViewById(R.id.imageNumber)
+
+        // we will use this view to display time and date
         val imageDateAndTime: TextView = view.findViewById(R.id.imageDateAndTime)
+
+        // we use this image view to display the image from url by help of glide
         val imageThumb: ImageView = view.findViewById(R.id.imageThumb)
     }
 

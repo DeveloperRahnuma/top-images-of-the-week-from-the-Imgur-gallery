@@ -20,7 +20,6 @@ class UserRepository @Inject constructor(
     )
 {
 
-     @RequiresApi(Build.VERSION_CODES.O)
      suspend fun getWeekTopImage(imageSearch : String): Flow<Resource<ImageDetails>> {
          return flow {
              try {

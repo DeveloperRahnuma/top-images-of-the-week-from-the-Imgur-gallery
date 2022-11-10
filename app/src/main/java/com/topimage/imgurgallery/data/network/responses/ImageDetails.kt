@@ -2,6 +2,10 @@ package com.topimage.imgurgallery.data.network.responses
 
 import com.squareup.moshi.Json
 
+// This class is depend on the json that api return
+// where AlbumResponse wll hold the data of album
+// and ImageDetailInAlbum will hold the data of each image inside
+// the album
 class ImageDetails(){
     lateinit var data : List<AlbumResponce>
 }

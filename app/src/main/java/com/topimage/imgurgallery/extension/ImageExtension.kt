@@ -5,6 +5,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.topimage.imgurgallery.R
 
+// loadImageOrDefault Extension function of image view class
+// so code look clean
 fun ImageView.loadImageOrDefault(imgUrl: String) {
     if (imgUrl.isNotEmpty())
         Glide.with(context)

@@ -13,7 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: UserRepository) : ViewModel() {
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    // this function will call the repository function and get the data from there
+    // and pass it to the view
     suspend fun getWeekTopImage(searchImage : String) : Flow<Resource<ImageDetails>> {
         return repository.getWeekTopImage(searchImage)
     }

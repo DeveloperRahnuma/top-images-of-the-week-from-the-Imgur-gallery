@@ -12,10 +12,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
 
+//Dependency injection app module
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    // for pass the MyApi instance by the help of hilt
     @Provides
     @Singleton
     fun provideApi(): MyApi {

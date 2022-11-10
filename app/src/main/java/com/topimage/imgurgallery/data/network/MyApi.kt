@@ -16,6 +16,7 @@ interface MyApi {
     ) : ImageDetails
 
 
+     //API for search image on imgur API
     @Headers("Authorization: Client-ID adcd17773fcdcde")
     @GET("gallery/search")
     suspend fun getSearchImage(@Query("q") searchImageName: String ,
