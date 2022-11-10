@@ -1,28 +1,23 @@
 package com.topimage.imgurgallery.ui.main
 
-import android.app.SearchManager
-import android.database.MatrixCursor
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ferfalk.simplesearchview.SimpleSearchView
 import com.topimage.imgurgallery.R
-import com.topimage.imgurgallery.data.db.entity.SearchString
 import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.databinding.ActivityMainBinding
 import com.topimage.imgurgallery.utill.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -32,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     val TAG = "MainActivity_Debug"
     // for bind the view with this activity
     lateinit var binding: ActivityMainBinding
-    private var viewModel : MainViewModel? = null
+    private var viewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

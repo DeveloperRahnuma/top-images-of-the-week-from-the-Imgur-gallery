@@ -1,10 +1,5 @@
 package com.topimage.imgurgallery.di
 
-import android.app.Application
-import androidx.room.Room
-import com.topimage.imgurgallery.data.db.Database
-import com.topimage.imgurgallery.data.db.DatabaseRepository
-import com.topimage.imgurgallery.data.db.DatabaseRepositoryImpl
 import com.topimage.imgurgallery.data.network.MyApi
 import dagger.Module
 import dagger.Provides
@@ -21,19 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
-    @Provides
-    @Singleton
-    fun provideDatabase(app: Application): Database {
-        return Room.databaseBuilder(app, Database::class.java, "imgur_db").build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRepository(db: Database): DatabaseRepository {
-        return DatabaseRepositoryImpl(db.dao)
-    }
-
     @Provides
     @Singleton
     fun provideApi(): MyApi {
@@ -42,6 +24,5 @@ object AppModule {
             .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }).build())
             .build().create()
     }
-
 
 }
