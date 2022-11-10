@@ -7,6 +7,7 @@ import android.provider.BaseColumns
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.lifecycle.ViewModelProvider
@@ -45,20 +46,26 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-
+        isShowLoadingScreen(needToShow = false)
         getImage("")
         searchSetup()
 
     }
 
     private fun getImage(searchImage : String){
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             viewModel?.getWeekTopImage(searchImage)?.collect{
                 when(it){
                     is Resource.Success -> {
+                        isShowLoadingScreen(needToShow = false)
                         it.Data?.let { it1 -> setUpRecycleView(it1.data) }
                     }
                     is Resource.Loading -> {
+                        isShowLoadingScreen(needToShow = true)
+                        Log.i(TAG, "Loading State")
+                    }
+                    is Resource.Error -> {
+                        isShowLoadingScreen(needToShow = false)
                         Log.i(TAG, "Loading State")
                     }
                     else -> {
@@ -72,10 +79,20 @@ class MainActivity : AppCompatActivity() {
 
     // set up the RecyclerView
     private fun setUpRecycleView(imageInfoList: List<AlbumResponce>){
-        runOnUiThread(){
+        runOnUiThread{
             binding.recycleView.layoutManager = LinearLayoutManager(this)
             val adapter = MainRecycleAdapter(this@MainActivity,imageInfoList)
             binding.recycleView.adapter = adapter
+        }
+    }
+
+    private fun isShowLoadingScreen(needToShow : Boolean){
+        runOnUiThread {
+            if(needToShow){
+                binding.progressCircularContainer.visibility = View.VISIBLE
+            }else{
+                binding.progressCircularContainer.visibility = View.INVISIBLE
+            }
         }
     }
 
