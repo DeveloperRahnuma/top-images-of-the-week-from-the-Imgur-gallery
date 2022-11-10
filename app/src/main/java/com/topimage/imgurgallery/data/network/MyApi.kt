@@ -1,6 +1,5 @@
 package com.topimage.imgurgallery.data.network
 
-import android.icu.text.StringSearch
 import com.topimage.imgurgallery.data.network.responses.ImageDetails
 import retrofit2.http.*
 
