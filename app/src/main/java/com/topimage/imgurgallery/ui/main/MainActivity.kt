@@ -1,10 +1,21 @@
 package com.topimage.imgurgallery.ui.main
 
+import android.app.SearchManager
+import android.database.MatrixCursor
 import android.os.Bundle
+import android.provider.BaseColumns
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ferfalk.simplesearchview.SimpleSearchView
+import com.topimage.imgurgallery.R
+import com.topimage.imgurgallery.data.db.entity.SearchString
 import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.databinding.ActivityMainBinding
 import com.topimage.imgurgallery.utill.Resource
@@ -30,15 +41,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        getImage()
+
+        getImage("")
+        searchSetup()
 
     }
 
-    private fun getImage(){
+    private fun getImage(searchImage : String){
         GlobalScope.launch(Dispatchers.IO) {
-            viewModel?.getWeekTopImage()?.collect{
+            viewModel?.getWeekTopImage(searchImage)?.collect{
                 when(it){
                     is Resource.Success -> {
                         it.Data?.let { it1 -> setUpRecycleView(it1.data) }
@@ -64,4 +79,66 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun searchSetup(){
+        binding.searchView.setOnQueryTextListener(object : SimpleSearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                getImage(query)
+                Log.d("SimpleSearchView", "Submit:$query")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Add this code to set threshold to expected value
+                lifecycleScope.launch {
+
+                }
+                return false
+            }
+
+            override fun onQueryTextCleared(): Boolean {
+                Log.d("SimpleSearchView", "Text cleared")
+                return false
+            }
+        })
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search_menu, menu)
+
+        val item: MenuItem = menu!!.findItem(R.id.action_search)
+        binding.searchView.setMenuItem(item)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_search -> {
+                binding.searchView.showSearch(animate = true)
+                return true
+            }
+            R.id.view_change -> {
+                if(item.title.equals("Grid View")){
+                    item.title = "List View"
+                    item.icon = this.getDrawable(R.drawable.listview)
+                    binding.recycleView.layoutManager = GridLayoutManager(this,2)
+                }else{
+                    item.title = "Grid View"
+                    item.icon = this.getDrawable(R.drawable.gridviewicon)
+                    binding.recycleView.layoutManager = LinearLayoutManager(this)
+                }
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (binding.searchView.onBackPressed()) {
+            return
+        }
+        super.onBackPressed()
+    }
 }

@@ -1,7 +1,8 @@
 package com.topimage.imgurgallery.data.db
 
 import androidx.room.*
-import com.topimage.imgurgallery.data.db.ImageSave
+import com.topimage.imgurgallery.data.db.entity.ImageSave
+import com.topimage.imgurgallery.data.db.entity.SearchString
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -10,6 +11,7 @@ interface DatabaseDao {
     // for insert image details into database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(imageSave: ImageSave)
+
 
     // for delete image details into database
     @Delete

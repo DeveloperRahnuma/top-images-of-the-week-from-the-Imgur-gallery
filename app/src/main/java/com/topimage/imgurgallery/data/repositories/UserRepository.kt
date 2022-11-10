@@ -1,6 +1,7 @@
 package com.topimage.imgurgallery.data.repositories
 
 import com.topimage.imgurgallery.data.db.Database
+import com.topimage.imgurgallery.data.db.entity.SearchString
 import com.topimage.imgurgallery.data.network.MyApi
 import com.topimage.imgurgallery.data.network.responses.ImageDetails
 import com.topimage.imgurgallery.utill.Resource
@@ -14,11 +15,16 @@ class UserRepository @Inject constructor(
     private val api: MyApi,
     private val db: Database)
 {
-     suspend fun getWeekTopImage(): Flow<Resource<ImageDetails>> {
+     suspend fun getWeekTopImage(imageSearch : String): Flow<Resource<ImageDetails>> {
          return flow {
              try {
                  emit(Resource.Loading(isLoading = true))
-                 val result = api.getWeekTopImage()
+                 var result : ImageDetails? = null
+                 if(imageSearch.isEmpty()){
+                      result = api.getWeekTopImage()
+                 }else{
+                      result = api.getSearchImage(imageSearch)
+                 }
                  if(result.data.size >= 0){
                      emit(Resource.Success(result))
                  }else{

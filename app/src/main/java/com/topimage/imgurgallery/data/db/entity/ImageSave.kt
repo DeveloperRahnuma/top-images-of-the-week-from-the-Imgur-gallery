@@ -1,4 +1,4 @@
-package com.topimage.imgurgallery.data.db
+package com.topimage.imgurgallery.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

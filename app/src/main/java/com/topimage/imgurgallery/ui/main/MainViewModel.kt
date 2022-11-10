@@ -1,6 +1,7 @@
 package com.topimage.imgurgallery.ui.main
 
 import androidx.lifecycle.ViewModel
+import com.topimage.imgurgallery.data.db.entity.SearchString
 import com.topimage.imgurgallery.data.network.responses.ImageDetails
 import com.topimage.imgurgallery.data.repositories.UserRepository
 import com.topimage.imgurgallery.utill.Resource
@@ -11,8 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val repository: UserRepository) : ViewModel() {
 
-    suspend fun getWeekTopImage() : Flow<Resource<ImageDetails>> {
-        return repository.getWeekTopImage()
+    suspend fun getWeekTopImage(searchImage : String) : Flow<Resource<ImageDetails>> {
+        return repository.getWeekTopImage(searchImage)
     }
 
 }

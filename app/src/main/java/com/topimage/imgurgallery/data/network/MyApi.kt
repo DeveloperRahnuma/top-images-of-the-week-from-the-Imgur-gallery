@@ -1,5 +1,6 @@
 package com.topimage.imgurgallery.data.network
 
+import android.icu.text.StringSearch
 import com.topimage.imgurgallery.data.network.responses.ImageDetails
 import retrofit2.http.*
 
@@ -12,6 +13,12 @@ interface MyApi {
         @Path("sort") sort: String = "top",
         @Path("page") page: String = "1",
         @Path("window") window: String = "week",
+    ) : ImageDetails
+
+
+    @Headers("Authorization: Client-ID adcd17773fcdcde")
+    @GET("gallery/search")
+    suspend fun getSearchImage(@Query("q") searchImageName: String ,
     ) : ImageDetails
 
 }

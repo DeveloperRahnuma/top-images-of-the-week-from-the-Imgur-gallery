@@ -1,5 +1,6 @@
 package com.topimage.imgurgallery.data.db
 
+import com.topimage.imgurgallery.data.db.entity.ImageSave
 import kotlinx.coroutines.flow.Flow
 
 class DatabaseRepositoryImpl(

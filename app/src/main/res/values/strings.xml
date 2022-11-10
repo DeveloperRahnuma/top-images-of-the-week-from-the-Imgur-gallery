@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Top Image From Imgur Gallery</string>
+
+    <string name="toolbar_title">Top Image</string>
+    <string name="toolbar_subtitle">From Imgur Gallery API</string>
+
+    <string name="gridvew">Grid View</string>
+    <string name="listview">List View</string>
 </resources>
