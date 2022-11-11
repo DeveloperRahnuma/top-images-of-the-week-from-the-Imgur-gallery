@@ -8,13 +8,26 @@ Best way clone or download the repository and run on your android studio:
 
 Import Project by Android Studio Menu > File > Import Project...
 
-## For run this project on your device Please Use
+### For run this project on your device Please Use
 
     Android Studio Chipmunk | 2021.2.1 Patch 1
     kotlin version '1.7.10'
     minSdk 21
     targetSdk 32
     compileSdk 32
+
+### third-party libraries used in the project
+
+    Dependency Injection -> Dagger Hilt
+    For Server Call -> Retrofit
+    Image Loading -> Glide
+    Architecture -> Mvvm
+
+For animated search bar on toolbar libraries used
+
+    com.github.Ferfalk:SimpleSearchView:0.2.0
+
+
 
 
 
