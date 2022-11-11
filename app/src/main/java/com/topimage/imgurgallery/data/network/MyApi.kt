@@ -8,7 +8,7 @@ interface MyApi {
     @Headers("Authorization: Client-ID adcd17773fcdcde")
     @GET("gallery/{section}/{sort}/{window}/{page}?showViral=true&mature=true&album_previews=true")
      suspend fun getWeekTopImage(
-        @Path("section") email: String = "top",
+        @Path("section") section: String = "top",
         @Path("sort") sort: String = "top",
         @Path("page") page: String = "1",
         @Path("window") window: String = "week",
