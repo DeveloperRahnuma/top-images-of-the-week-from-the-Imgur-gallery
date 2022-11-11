@@ -16,7 +16,6 @@ import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.databinding.ActivityMainBinding
 import com.topimage.imgurgallery.utill.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -24,10 +23,10 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     // for use debug things under this activity
-    val TAG = "MainActivity_Debug"
+    private val TAG = "MainActivity_Debug"
 
     // for bind the view with this activity
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     //view model instance it should be provided by hilt but hilt current version
     // have some issue so
@@ -80,9 +79,6 @@ class MainActivity : AppCompatActivity() {
                         isShowLoadingScreen(needToShow = false)
                         Log.i(TAG, "Loading State")
                     }
-                    else -> {
-                        Log.i(TAG, "Loading Errror state")
-                    }
                 }
             }
         }
@@ -120,7 +116,7 @@ class MainActivity : AppCompatActivity() {
     //onQueryTextSubmit -  will triggered when user click on search button on keyboard
     //onQueryTextChange -  will triggered when user either enter or click any letter
     //onQueryTextCleared -  will triggered when user completely clear query
-    fun searchSetup(){
+    private fun searchSetup(){
         binding.searchView.setOnQueryTextListener(object : SimpleSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 getImage(query)
@@ -164,6 +160,7 @@ class MainActivity : AppCompatActivity() {
             R.id.view_change -> {
                 if(item.title.equals("Grid View")){
                     item.title = "List View"
+
                     item.icon = this.getDrawable(R.drawable.listview)
                     binding.recycleView.layoutManager = GridLayoutManager(this,2)
                 }else{
