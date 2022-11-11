@@ -1,6 +1,12 @@
 # Top Images Of The Week From The Imgur Gallery
 Android Studio project on kotlin + XML ( jetpack compose support will added later )
 
+
+
+https://user-images.githubusercontent.com/31402470/201424619-db933dd5-0d43-4f55-b79a-7a3fdecdbe3a.mov
+
+
+
 ## Installation
 Best way clone or download the repository and run on your android studio:
 
