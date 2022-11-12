@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // set up the RecyclerView and its layout manager
-    // layout manager can changed later too
+    // layout manager will change later for showing data in list and grid
     private fun setUpRecycleView(imageInfoList: List<AlbumResponce>){
         runOnUiThread{
             binding.recycleView.layoutManager = LinearLayoutManager(this)

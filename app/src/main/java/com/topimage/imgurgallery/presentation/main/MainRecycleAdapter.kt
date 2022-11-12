@@ -14,8 +14,8 @@ import com.topimage.imgurgallery.extension.loadImageOrDefault
 class MainRecycleAdapter(private val image: List<AlbumResponce>) : RecyclerView.Adapter<MainRecycleAdapter.ViewHolder>(){
 
     // holder class to hold reference
+    // get view reference of item design which is in list_item
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        //get view reference of item design which is in list_item
 
         // here we will display the description of image
         val imageTitleText: TextView = view.findViewById(R.id.titleText)
