@@ -1,6 +1,6 @@
 package com.topimage.imgurgallery.ui.main
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import com.topimage.imgurgallery.R
 import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.extension.loadImageOrDefault
 
-class MainRecycleAdapter(val context: Context,private val image: List<AlbumResponce>) : RecyclerView.Adapter<MainRecycleAdapter.ViewHolder>(){
+class MainRecycleAdapter(private val image: List<AlbumResponce>) : RecyclerView.Adapter<MainRecycleAdapter.ViewHolder>(){
 
     // holder class to hold reference
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -34,6 +34,7 @@ class MainRecycleAdapter(val context: Context,private val image: List<AlbumRespo
         return ViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imageTitleText.text = image[position].title
         holder.imageNumber.text = "1 / ${image[position].images_count}"

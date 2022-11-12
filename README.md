@@ -54,9 +54,11 @@ while try to convert it to date format it through the error Unpassable date: "16
 
 I used hilt for DI and according to rule view model instance get in activity with this
 viewModel: MainViewModel? by viewmodel() but its not working that is a issue with hilt used version
-thats why i have to make the instance of view model in below way 
+that's why i have to make the instance of view model in below way 
 
     viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+for some result total number of image show null that's because api have that result
 
 
 

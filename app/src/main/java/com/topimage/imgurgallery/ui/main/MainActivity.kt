@@ -14,7 +14,6 @@ import com.ferfalk.simplesearchview.SimpleSearchView
 import com.topimage.imgurgallery.R
 import com.topimage.imgurgallery.data.network.responses.AlbumResponce
 import com.topimage.imgurgallery.databinding.ActivityMainBinding
-import com.topimage.imgurgallery.utill.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -61,22 +60,24 @@ class MainActivity : AppCompatActivity() {
     //we used flow which emit different type of data sequentially
     // once you receive the data perform action according to that
     private fun getAlbumDetailFromServer(searchImageName: String){
-        viewModel?.getImage(
-            searchImageName = searchImageName,
-            fetchedAlbumData = {
-                hideNoData()
-                hideloading()
-                setUpRecycleView(it)
-            },
-            showLoading = {
-                hideNoData()
-                showloading()
-            },
-            showNoData = {
-                hideloading()
-                showNoData()
-            }
-        )
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel?.getImage(
+                searchImageName = searchImageName,
+                fetchedAlbumData = {
+                    hideNoData()
+                    hideloading()
+                    setUpRecycleView(it)
+                },
+                showLoading = {
+                    hideNoData()
+                    showloading()
+                },
+                showNoData = {
+                    hideloading()
+                    showNoData()
+                }
+            )
+        }
     }
 
 
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpRecycleView(imageInfoList: List<AlbumResponce>){
         runOnUiThread{
             binding.recycleView.layoutManager = LinearLayoutManager(this)
-            val adapter = MainRecycleAdapter(this@MainActivity,imageInfoList)
+            val adapter = MainRecycleAdapter(imageInfoList)
             binding.recycleView.adapter = adapter
         }
     }
@@ -170,13 +171,13 @@ class MainActivity : AppCompatActivity() {
             //when search icon get clicked
             R.id.action_search -> {
                 binding.searchView.showSearch(animate = true)
-                return true
+                true
             }
             R.id.view_change -> {
                 changeListViewDesignAndIcon(item)
-                return true
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
