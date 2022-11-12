@@ -1,4 +1,4 @@
-package com.topimage.imgurgallery.ui.main
+package com.topimage.imgurgallery.presentation.main
 
 import androidx.lifecycle.ViewModel
 import com.topimage.imgurgallery.data.network.responses.AlbumResponce
@@ -6,8 +6,6 @@ import com.topimage.imgurgallery.data.repositories.UserRepository
 import com.topimage.imgurgallery.utill.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.topimage.imgurgallery.ui.main
+package com.topimage.imgurgallery.presentation.main
 
 import android.os.Bundle
 import android.util.Log
@@ -21,13 +21,13 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    // for use debug things under this activity
+    // For use debug things under this activity
     private val TAG = "MainActivity_Debug"
 
-    // for bind the view with this activity
+    // For bind the view with this activity
     private lateinit var binding: ActivityMainBinding
 
-    //view model instance it should be provided by hilt but hilt current version
+    // view model instance it should be provided by hilt but hilt current version
     // have some issue so
     // viewModel: MainViewModel? by viewmodel()
     // not working
@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity() {
         //we are using toolbar in place of action bar ( for it you need to change them of app also )
         setSupportActionBar(binding.toolbar)
 
-        //getting instance of view mode here and why we are creating instance like this
-        //explained up side where viewModel declared
+        //Getting an instance of viewmodel here and why we are creating an instance like this
+        //Explained up the side where ViewModel declared
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        //for call server api and fetch the data
+        //for call server api. and fetch the data
         getAlbumDetailFromServer("")
 
         //function for implementing animated search bar on toolbar
@@ -119,8 +119,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //  the no data screen will hide on screen, means server have data return
-    // runOnUiThread will execute this code on main thread because other thread cannot touch the view
+    // The no data screen will hide on screen, means server have data return
+    // RunOnUiThread will execute this code on main thread because other thread cannot touch the view
     private fun hideNoData() {
         runOnUiThread {
             binding.noData.visibility = View.INVISIBLE
@@ -182,7 +182,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //when gird or list icon get click
+    // when gird or list icon get click
     // then icon of that item and recycle view layout manager get changed
     private fun changeListViewDesignAndIcon(item: MenuItem){
         if(item.title.equals("Grid View")){
@@ -196,12 +196,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //for change toggal icon name and icon
     private fun toggalIconChangeToGrid(toggleIcon : MenuItem){
         toggleIcon.title = "Grid View"
         toggleIcon.icon = getDrawable(R.drawable.gridviewicon)
     }
 
-
+    //for change toggal icon name and icon
     private fun toggalIconChangeToList(toggleIcon : MenuItem){
         toggleIcon.title = "List View"
         toggleIcon.icon = getDrawable(R.drawable.listview)

@@ -1,4 +1,4 @@
-package com.topimage.imgurgallery.ui.main
+package com.topimage.imgurgallery.presentation.main
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
