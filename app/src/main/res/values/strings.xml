@@ -6,4 +6,7 @@
 
     <string name="gridvew">Grid View</string>
     <string name="listview">List View</string>
+
+
+    <string name="moDataFound_title">No Data Found ! Kindly search with different word</string>
 </resources>

@@ -84,6 +84,7 @@ dependencies {
     //New Material Design
     implementation 'com.google.android.material:material:1.8.0-alpha02'
 
+
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 

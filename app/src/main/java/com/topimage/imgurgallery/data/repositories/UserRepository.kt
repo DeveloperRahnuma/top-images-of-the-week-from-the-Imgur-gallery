@@ -20,17 +20,17 @@ class UserRepository @Inject constructor(
     )
 {
 
-     suspend fun getWeekTopImage(imageSearch : String): Flow<Resource<ImageDetails>> {
+     suspend fun getWeekTopImage(searchImageName : String): Flow<Resource<ImageDetails>> {
          return flow {
              try {
                  emit(Resource.Loading(isLoading = true))
                  var result : ImageDetails? = null
-                 if(imageSearch.isEmpty()){
+                 if(searchImageName.isEmpty()){
                      result = api.getWeekTopImage()
                  }else{
-                      result = api.getSearchImage(imageSearch)
+                      result = api.getSearchImage(searchImageName)
                  }
-                 if(result.data.size >= 0){
+                 if(result.data.isNotEmpty()){
                      emit(Resource.Success(result))
                  }else{
                      emit(Resource.Error("Something Wrong With Api"))
