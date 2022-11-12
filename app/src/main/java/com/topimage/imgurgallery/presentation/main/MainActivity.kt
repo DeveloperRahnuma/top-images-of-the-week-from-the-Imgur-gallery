@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //ActivityMainBinding generated from xml file name
-        //that's bind with this activity to display content here
+        //That's bind with this activity to display content here
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
